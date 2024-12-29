@@ -1,12 +1,12 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="tox-docker",
-    description="Manage lifecycle of docker containers during Tox test runs",
+    name="tox-docker-id",
+    description="Manage lifecycle of docker containers during Tox test runs (patched version)",
     long_description=open("README.rst").read(),
-    url="https://github.com/tox-dev/tox-docker",
-    maintainer="Dan Crosta",
-    maintainer_email="dcrosta@late.am",
+    url="https://github.com/d9pouces/tox-docker",
+    maintainer="Matthieu Gallet",
+    maintainer_email="github@19pouces.net",
     install_requires=[
         "docker>=4.0,<8.0",
         "tox>=4.0.0,<5.0",
@@ -23,6 +23,8 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
         "Topic :: Software Development :: Testing",
     ],
 )

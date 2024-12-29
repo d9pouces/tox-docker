@@ -2,6 +2,19 @@
  tox-docker
 ============
 
+Disclaimer: this is a slightly patched version of the original tox-docker plugin.
+
+* rw volumes can be created on the fly (to be used in the .tox folder) : https://github.com/tox-dev/tox-docker/pull/192
+* the container names are added to the environment, of the form `<container_name>_CONTAINER`.
+  You can now use commands such that docker run --link {env:POSTGRES_CONTAINER} (...) in your tox commands : https://github.com/tox-dev/tox-docker/pull/189
+
+This gentle fork is published on pypi as `tox-docker-id` and can be installed with `pip install tox-docker-id`.
+It will be abandoned as soon as the original plugin is updated with these features.
+
+
+
+
+
 A `tox <https://tox.wiki/en/latest/>`__ plugin which runs one or
 more `Docker <https://www.docker.com/>`__ containers during the test run.
 
