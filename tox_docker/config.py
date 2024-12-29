@@ -141,6 +141,8 @@ class Volume:
         volume_type, mode, outside, inside = parts
         if not os.path.isabs(outside):
             raise ValueError(f"Volume source {outside!r} must be an absolute path")
+        elif not os.path.exists(outside) and parts[1] == "rw":
+            os.makedirs(outside, exist_ok=True)
         if not os.path.isabs(inside):
             raise ValueError(f"Mount point {inside!r} must be an absolute path")
 
