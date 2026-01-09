@@ -207,6 +207,7 @@ def docker_run(
 
     container = docker.containers.run(
         container_config.runnable_image.id,
+        command=container_config.command,
         name=container_config.runas_name,
         detach=True,
         environment=container_config.environment,

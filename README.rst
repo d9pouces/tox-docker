@@ -7,6 +7,7 @@ Disclaimer: this is a slightly patched version of the original tox-docker plugin
 * rw volumes can be created on the fly (to be used in the .tox folder) : https://github.com/tox-dev/tox-docker/pull/192
 * the container names are added to the environment, of the form `<container_name>_CONTAINER`.
   You can now use commands such that docker run --link {env:POSTGRES_CONTAINER} (...) in your tox commands : https://github.com/tox-dev/tox-docker/pull/189
+* a custom docker command can be specified to override CMD (https://github.com/tox-dev/tox-docker/issues/114)
 
 This gentle fork is published on pypi as `tox-docker-id` and can be installed with `pip install tox-docker-id`.
 It will be abandoned as soon as the original plugin is updated with these features.
@@ -72,6 +73,10 @@ The ``[docker:container-name]`` section may contain the following directives:
     This value is passed directly to Docker, and may be of any of the forms
     that Docker accepts in eg ``docker run``. One of ``image`` or
     ``dockerfile`` is required.
+
+``command``
+    The command to run within the container, as a string If not
+    specified, the default command built into the image is used.
 
 ``dockerfile``
     Path to a `Dockerfile <https://docs.docker.com/glossary/#dockerfile>`__

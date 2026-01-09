@@ -173,6 +173,7 @@ class ContainerConfig:
         container_var: Optional[ContainerVar] = None,
         links: Optional[Collection[Link]] = None,
         volumes: Optional[Collection[Volume]] = None,
+        command: Optional[str] = None,
     ) -> None:
         self.name = name
         self.runas_name = runas_name(name)
@@ -181,6 +182,7 @@ class ContainerConfig:
         self.dockerfile_target = dockerfile_target
         self.stop = stop
         self.environment: Mapping[str, str] = environment or {}
+        self.command = command
         self.expose: Collection[ExposedPort] = expose or []
         self.host_var = str(host_var) if host_var else ""
         self.container_var = str(container_var) if container_var else ""
@@ -232,6 +234,12 @@ class DockerConfigSet(ConfigSet):
             of_type=str,
             default="",
             desc="Dockerfile target to build/run",
+        )
+        self.add_config(
+            keys=["command"],
+            of_type=str,
+            default=None,
+            desc="The command to run within the container",
         )
         self.add_config(
             keys=["environment"],
@@ -328,6 +336,7 @@ def parse_container_config(docker_config: DockerConfigSet) -> ContainerConfig:
         healthcheck_timeout=docker_config["healthcheck_timeout"],
         healthcheck_start_period=docker_config["healthcheck_start_period"],
         healthcheck_retries=docker_config["healthcheck_retries"],
+        command=docker_config["command"],
         expose=docker_config["expose"],
         host_var=docker_config["host_var"],
         links=docker_config["links"],
