@@ -50,7 +50,13 @@ def get_gateway_ip(container: Container) -> str:
         # made available on localhost (but 0.0.0.0 works just as well)
         ip = "0.0.0.0"
     else:
-        ip = container.attrs["NetworkSettings"]["Gateway"] or "0.0.0.0"
+        ip = container.attrs["NetworkSettings"].get("Gateway", "0.0.0.0") or "0.0.0.0"
+        if "Gateway" not in container.attrs["NetworkSettings"]:
+            log(
+                "Warning: no gateway found for container; using 0.0.0.0 instead: %s"
+                % container.attrs["NetworkSettings"]
+            )
+
     return ip
 
 
